@@ -1,0 +1,69 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage{fontspec}
+\setromanfont{Euclid}
+\setsansfont{PT Sans}
+\begin{document}
+\title{TAPL: Homework 1}
+\author{Ruizhe Zhao\\[10pt]
+		1200012778\\
+		\textit{vincentzhaorz@pku.edu.cn}}
+\date{}
+\maketitle
+
+\noindent
+\textbf{Exercise 3.5.16} A different way of formalizing meaningless states of the abstract machine is to introduce a new term called wrong and augment the operational semantics with rules that explicitly generate wrong in all the situations where the present semantics gets stuck. To do this in detail, we introduce two new syntactic categories.
+
+Show that these two treatments of run-time errors agree by 
+\begin{description}
+\item[Question 1] \textit{finding a precise way of stating the intuition that “the two treatments agree”}
+
+Given a full set of states $\mathcal{S}$ and its subset $\mathcal{A}$ containing all the "meaningful states", so the "meaningless states" could be descripted as $\mathcal{B}$ which is equivalent to $\mathcal{S}-\mathcal{A}$.
+
+The way we define "meaningless states" determines the set $\mathcal{B}$. And if two treatments agree, intuitionally, we should know that the set $\mathcal{B}$ should be invariant in both treatments. So the key point for proving two treatments are agree is finding a way to prove the two forms of $\mathcal{B}$ are equal.
+
+\newtheorem{thm}{Theorem}
+\begin{thm}
+If the two treatments agree, then the set $\mathcal{B}$ is invariant between both solutions.
+\end{thm}
+
+Let's prove the two treatments agree by using \textbf{Theorem 1}.
+
+\item[Question 2] \textit{proving it}
+
+Let's take $\mathcal{B}_1$ as the set of meaningless states defined by the first treatment, and $\mathcal{B}_2$ is defined by using \texttt{wrong}.
+
+\newtheorem{hyp}{Hypothesis}
+
+\begin{hyp}
+There's no one state s in $\mathcal{B}_1$ which is not in $\mathcal{B}_2$. 
+\end{hyp}
+$ s \in \mathcal{B}_1$ \\
+$\Leftrightarrow$ $s$ is stucked \\
+$\Leftrightarrow$ $s$ is a normal form but not a value(Definition 3.5.15)\\
+$ s \in \mathcal{B}_2$ \\
+$\Leftrightarrow$ $s$ is not wrong \\
+$\Leftrightarrow$ $s$ is one of true, false or nv\\
+$\Leftrightarrow$ $s$ is a normal form and a value\\
+$\Longrightarrow$ \textit{failed}.
+
+\begin{hyp}
+There's no one state s in $\mathcal{B}_2$ which is not in $\mathcal{B}_1$. 
+\end{hyp}
+$ s \in \mathcal{B}_2$ \\
+$\Leftrightarrow$ $s$ is wrong \\
+$\Leftrightarrow$ $s$ is a normal form but not a value(Definition 3.5.15)\\
+$\Leftrightarrow$ $s$ is stucked \\
+$\Leftrightarrow$ $s$ $\in \mathcal{B}_1$\\
+$\Longrightarrow$ \textit{failed}.
+
+As \textbf{Hypothesis 1} and \textbf{Hypothesis 2} are both failed. \\
+$s \in \mathcal{B}_1 \Rightarrow s \in \mathcal{B}_2$\\
+$s \in \mathcal{B}_2 \Rightarrow s \in \mathcal{B}_1$\\
+$\Longrightarrow \mathcal{B}_1 = \mathcal{B}_2$
+
+So the both treatments are agree.
+
+\end{description}
+
+\end{document}
